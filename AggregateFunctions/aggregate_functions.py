@@ -52,6 +52,21 @@ class AggregateFunctions():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def avg_function(self):
+        """
+        Description:
+            This function will give the average of entries in particular column.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            avg_query = "select avg(salary) as 'average salary' from employee_details"
+            my_cursor.execute(avg_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 aggregate = AggregateFunctions()
 aggregate.count_function()
 aggregate.sum_function()
+aggregate.avg_function()
