@@ -123,13 +123,27 @@ class CrudOperations():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def delet_record(self):
+        """
+        Description:
+            This function will delete the entry from table.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("delete from employee_details where employee_name='Amar'")
+            db_connection.commit()
+            logger.info("Record deleted")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
  
 operations = CrudOperations()
 operations.show_database()
 operations.show_tables()
 operations.read_tables()
 operations.create_table()
-#operations.insert_data()
+operations.insert_data()
 operations.read_employee_table()
 operations.alter_table()
 operations.update_table()
+operations.delet_record()
