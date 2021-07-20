@@ -80,14 +80,42 @@ class CrudOperations():
         try:
             my_cursor = db_connection.cursor()
             my_cursor.execute("insert into employee_details(employee_name,salary) values ('Mayur','40000'),('Amar', '50000')")
+            db_connection.commit()
             logger.info(f"Data inserted: {my_cursor}")
         except Exception as e:
             logger.info(f"Errorr!!{e}")
+    def read_employee_table(self):
+            """
+            Description:
+                This function will read all the information in table in database with given query.
+            """
+            try:
+                my_cursor = db_connection.cursor()
+                my_cursor.execute("select * from employee_details")
+                for i in my_cursor:
+                    logger.info(i)
+            except Exception as e:
+                logger.info(f"Errorr!!{e}")
 
-    
+    def alter_table(self):
+        """
+        Description:
+            This function will read all the information in table in database with given query.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("alter table employee_details ADD column gender varchar(10) after employee_name")
+            db_connection.commit()
+            logger.info(f"column added")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+ 
 operations = CrudOperations()
 operations.show_database()
 operations.show_tables()
 operations.read_tables()
 operations.create_table()
-operations.insert_data()
+#operations.insert_data()
+operations.read_employee_table()
+operations.alter_table()
