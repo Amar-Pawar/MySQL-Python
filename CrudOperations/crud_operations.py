@@ -46,8 +46,21 @@ class CrudOperations():
                 logger.info(i)
         except Exception as e:
             logger.info(f"Errorr!!{e}")
-    
+        
+    def read_tables(self):
+        """
+        Description:
+            This function will read all the information in table in database with given query.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("select * from student_info")
+            for i in my_cursor:
+                logger.info(i)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
     
 operations = CrudOperations()
 operations.show_database()
 operations.show_tables()
+operations.read_tables()
