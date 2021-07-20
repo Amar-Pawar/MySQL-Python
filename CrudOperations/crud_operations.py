@@ -16,11 +16,11 @@ load_dotenv()
 
 # setting up the connection
 db_connection = mysql.connector.connect(
-     host = os.environ.get("host"),
-     user = os.environ.get("user"),
-     passwd= os.environ.get("passwd"),
-     auth_plugin = os.environ.get("auth_plugin"),
-     database = os.environ.get("database")
+     host = os.environ.get("DB_HOST"),
+     user = os.environ.get("DB_USER"),
+     passwd= os.environ.get("DB_PASSWORD"),
+     auth_plugin = os.environ.get("AUTH_PLUGIN"),
+     database = os.environ.get("DATABASE")
     )
 
 class CrudOperations():
@@ -83,7 +83,7 @@ class CrudOperations():
         """
         try:
             my_cursor = db_connection.cursor()
-            my_cursor.execute("insert into employee_details(employee_name,salary) values ('Mayur','40000'),('Amar', '50000')")
+            my_cursor.execute("insert into employee_details(employee_name,salary) values ('Mayur','40000'),('Amar', '50000'),('Neha','50000')")
             db_connection.commit()
             logger.info(f"Data inserted: {my_cursor}")
         except Exception as e:
@@ -121,13 +121,13 @@ class CrudOperations():
         """
         try:
             my_cursor = db_connection.cursor()
-            my_cursor.execute("update employee_details set gender='M' where employee_name='Mayur'")
+            my_cursor.execute("update employee_details set gender='M' where employee_name='Mayur','Neha','Amar'")
             db_connection.commit()
             logger.info("Record updated")
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
-    def delet_record(self):
+    def delete_record(self):
         """
         Description:
             This function will delete the entry from table.
@@ -140,6 +140,36 @@ class CrudOperations():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def sort_record(self):
+        """
+        Description:
+            This function will sort records in ascending order.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("select * from employee_details order by employee_name")
+            result = my_cursor.fetchall()
+            for record in result:
+                logger.info(record)
+            logger.info("Record sorted by name")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+    def group_record(self):
+        """
+        Description:
+            This function will group records by given condition.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("select count(employee_name), salary from employee_details group by salary")
+            result = my_cursor.fetchall()
+            for i in result:
+                logger.info(i)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+
  
 operations = CrudOperations()
 operations.show_database()
@@ -150,4 +180,6 @@ operations.insert_data()
 operations.read_employee_table()
 operations.alter_table()
 operations.update_table()
-operations.delet_record()
+operations.delete_record()
+operations.sort_record()
+operations.group_record()
