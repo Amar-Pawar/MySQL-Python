@@ -66,7 +66,22 @@ class AggregateFunctions():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def min_function(self):
+        """
+        Description:
+            This function will give the minimum value in particular column.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            min_query = "select min(salary) as 'minimum salary' from employee_details"
+            my_cursor.execute(min_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 aggregate = AggregateFunctions()
 aggregate.count_function()
 aggregate.sum_function()
 aggregate.avg_function()
+aggregate.min_function()
