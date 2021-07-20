@@ -21,7 +21,7 @@ db_connection = mysql.connector.connect(
 
 class CrudOperations():
 
-    def read_database(self):
+    def show_database(self):
         """
         Description:
             This function shows all the databases present with given query.
@@ -33,6 +33,21 @@ class CrudOperations():
                 logger.info(i)
         except Exception as e:
             logger.info(f"Errorr!!{e}")
+
+    def show_tables(self):
+        """
+        Description:
+            This function shows all the tables present in database with given query.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("show tables")
+            for i in my_cursor:
+                logger.info(i)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+    
     
 operations = CrudOperations()
-operations.read_database()
+operations.show_database()
+operations.show_tables()
