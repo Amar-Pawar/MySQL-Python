@@ -9,14 +9,18 @@
 '''
 from logging_handler import logger
 import mysql.connector
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # setting up the connection
 db_connection = mysql.connector.connect(
-     host = 'localhost',
-     user = 'root',
-     passwd= '',
-     auth_plugin = 'mysql_native_password',
-     database = 'student'
+     host = os.environ.get("host"),
+     user = os.environ.get("user"),
+     passwd= os.environ.get("passwd"),
+     auth_plugin = os.environ.get("auth_plugin"),
+     database = os.environ.get("database")
     )
 
 class CrudOperations():
