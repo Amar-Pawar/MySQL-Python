@@ -29,7 +29,22 @@ class JoinFunction():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def right_join(self):
+        """
+        Description:
+            This function will create inner join between two tables and find intersecting values.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            right_join_query ="select employee_details.id,employee_details.name,employee_details.salary,department.department_id,department.dept_name from department right join employee_details on department.department_id = employee_details.department_id"
+            my_cursor.execute(right_join_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 join_object = JoinFunction()
 join_object.inner_join()
+join_object.right_join()
 
 
