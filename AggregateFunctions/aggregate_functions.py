@@ -108,6 +108,20 @@ class AggregateFunctions():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def last_function(self):
+        """
+        Description:
+            This function will give the last value in particular column.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            last_query = "select employee_name from employee_details order by employee_name desc limit 1"
+            my_cursor.execute(last_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 aggregate = AggregateFunctions()
 aggregate.count_function()
 aggregate.sum_function()
@@ -115,3 +129,4 @@ aggregate.avg_function()
 aggregate.min_function()
 aggregate.max_function()
 aggregate.first_function()
+aggregate.last_function()
