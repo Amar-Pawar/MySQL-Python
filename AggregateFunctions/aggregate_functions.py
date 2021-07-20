@@ -80,8 +80,23 @@ class AggregateFunctions():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def max_function(self):
+        """
+        Description:
+            This function will give the maximum value in particular column.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            max_query = "select max(salary) as 'minimum salary' from employee_details"
+            my_cursor.execute(max_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 aggregate = AggregateFunctions()
 aggregate.count_function()
 aggregate.sum_function()
 aggregate.avg_function()
 aggregate.min_function()
+aggregate.max_function()
