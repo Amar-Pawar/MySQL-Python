@@ -38,5 +38,20 @@ class AggregateFunctions():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def sum_function(self):
+        """
+        Description:
+            This function will give the sum of entries in particular column.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            sum_query = "select sum(salary) as 'total_salary' from employee_details"
+            my_cursor.execute(sum_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 aggregate = AggregateFunctions()
 aggregate.count_function()
+aggregate.sum_function()
