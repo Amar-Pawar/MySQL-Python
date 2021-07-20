@@ -158,7 +158,7 @@ class CrudOperations():
     def group_record(self):
         """
         Description:
-            This function will group records by given condition.
+            This function will group records by given condition in query.
         """
         try:
             my_cursor = db_connection.cursor()
