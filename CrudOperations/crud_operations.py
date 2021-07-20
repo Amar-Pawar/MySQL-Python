@@ -121,7 +121,7 @@ class CrudOperations():
         """
         try:
             my_cursor = db_connection.cursor()
-            my_cursor.execute("update employee_details set gender='M' where employee_name='Mayur','Neha','Amar'")
+            my_cursor.execute("update employee_details set gender='M' where employee_name='Mayur'")
             db_connection.commit()
             logger.info("Record updated")
         except Exception as e:
@@ -158,14 +158,13 @@ class CrudOperations():
     def group_record(self):
         """
         Description:
-            This function will group records by given condition in query.
+            This function will group records by given condition.
         """
         try:
             my_cursor = db_connection.cursor()
             my_cursor.execute("select count(employee_name), salary from employee_details group by salary")
             result = my_cursor.fetchall()
-            for i in result:
-                logger.info(i)
+            logger.info(result)
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
