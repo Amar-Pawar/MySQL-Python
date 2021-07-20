@@ -100,13 +100,26 @@ class CrudOperations():
     def alter_table(self):
         """
         Description:
-            This function will read all the information in table in database with given query.
+            This function will alter the table and add column gender to it.
         """
         try:
             my_cursor = db_connection.cursor()
             my_cursor.execute("alter table employee_details ADD column gender varchar(10) after employee_name")
             db_connection.commit()
             logger.info(f"column added")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+    def update_table(self):
+        """
+        Description:
+            This function will update the column inside table.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("update employee_details set gender='M' where employee_name='Mayur'")
+            db_connection.commit()
+            logger.info("Record updated")
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
@@ -119,3 +132,4 @@ operations.create_table()
 #operations.insert_data()
 operations.read_employee_table()
 operations.alter_table()
+operations.update_table()
