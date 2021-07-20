@@ -59,8 +59,35 @@ class CrudOperations():
                 logger.info(i)
         except Exception as e:
             logger.info(f"Errorr!!{e}")
+
+    def create_table(self):
+        """
+        Description:
+            This function will create table in given database.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("create table employee_details(id int(4) auto_increment primary key not null, employee_name varchar(15),salary int(5))")
+            logger.info(f"Table created {my_cursor}")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+    def insert_data(self):
+        """
+        Description:
+            This function will insert data into table.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("insert into employee_details(employee_name,salary) values ('Mayur','40000'),('Amar', '50000')")
+            logger.info(f"Data inserted: {my_cursor}")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
     
 operations = CrudOperations()
 operations.show_database()
 operations.show_tables()
 operations.read_tables()
+operations.create_table()
+operations.insert_data()
