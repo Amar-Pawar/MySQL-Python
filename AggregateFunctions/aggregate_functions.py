@@ -94,9 +94,24 @@ class AggregateFunctions():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def first_function(self):
+        """
+        Description:
+            This function will give the first value in particular column.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            first_query = "select salary from employee_details limit 1"
+            my_cursor.execute(first_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 aggregate = AggregateFunctions()
 aggregate.count_function()
 aggregate.sum_function()
 aggregate.avg_function()
 aggregate.min_function()
 aggregate.max_function()
+aggregate.first_function()
