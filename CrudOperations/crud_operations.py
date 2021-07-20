@@ -75,7 +75,7 @@ class CrudOperations():
     def insert_data(self):
         """
         Description:
-            This function will insert data into table.
+            This function will insert data into table with given query.
         """
         try:
             my_cursor = db_connection.cursor()
