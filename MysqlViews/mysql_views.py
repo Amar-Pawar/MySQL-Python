@@ -78,8 +78,23 @@ class MysqlViews():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def create_view_with_join(self):
+        """
+        Description:
+            This function will create mysql view with join clause from given columns from table.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            create_view_query ="create view emp_data as select name,salary,dept_name from employee_details inner join department using (department_id)"
+            my_cursor.execute(create_view_query)
+            logger.info("View created")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+
 view_object = MysqlViews()
 view_object.create_view()
 view_object.display_view()
 view_object.update_view()
 view_object.display_updated_view()
+view_object.create_view_with_join()
