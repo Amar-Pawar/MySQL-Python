@@ -52,6 +52,21 @@ class MysqlIndexes():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def explain_index(self):
+        """
+        Description:
+            This function will retrieve data with index.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            explain_index_query ="explain select * from employee_details where salary = '30000'"
+            my_cursor.execute(explain_index_query)
+            result = my_cursor.fetchall()
+            logger.info(f"Information as below {result}")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 index_obj = MysqlIndexes()
 index_obj.create_index()
 index_obj.show_index()
+index_obj.explain_index()
