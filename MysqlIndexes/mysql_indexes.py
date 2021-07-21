@@ -80,8 +80,23 @@ class MysqlIndexes():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def update_by_index(self):
+        """
+        Description:
+            This function will update data with index.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            update_data_query ="update employee_details set salary ='70000' where name = 'Mayur'"
+            my_cursor.execute(update_data_query)
+            db_connection.commit()
+            logger.info("record updated")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 index_obj = MysqlIndexes()
 index_obj.create_index()
 index_obj.show_index()
 index_obj.explain_index()
 index_obj.retrieve_by_index()
+index_obj.update_by_index()
