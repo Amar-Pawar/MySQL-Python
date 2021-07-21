@@ -38,5 +38,20 @@ class MysqlIndexes():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def show_index(self):
+        """
+        Description:
+            This function will show indexes.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            show_index_query ="show indexes from employee_details"
+            my_cursor.execute(show_index_query)
+            result = my_cursor.fetchall()
+            logger.info(f"Information as below {result}")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 index_obj = MysqlIndexes()
 index_obj.create_index()
+index_obj.show_index()
