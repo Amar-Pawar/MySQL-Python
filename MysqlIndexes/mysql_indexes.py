@@ -94,9 +94,25 @@ class MysqlIndexes():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def show_data(self):
+        """
+        Description:
+            This function will retrieve data.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            show_data_query ="select * from employee_details"
+            my_cursor.execute(show_data_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+
 index_obj = MysqlIndexes()
 index_obj.create_index()
 index_obj.show_index()
 index_obj.explain_index()
 index_obj.retrieve_by_index()
 index_obj.update_by_index()
+index_obj.show_data()
