@@ -104,11 +104,25 @@ class MysqlViews():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def drop_view(self):
+        """
+        Description:
+            This function will drop view.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            drop_view_query ="drop view emp_summary"
+            my_cursor.execute(drop_view_query)
+            logger.info("View deleted")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 
 view_object = MysqlViews()
-# view_object.create_view()
-# view_object.display_view()
-# view_object.update_view()
-# view_object.display_updated_view()
-# view_object.create_view_with_join()
+view_object.create_view()
+view_object.display_view()
+view_object.update_view()
+view_object.display_updated_view()
+view_object.create_view_with_join()
 view_object.create_view_from_view()
+view_object.drop_view()
