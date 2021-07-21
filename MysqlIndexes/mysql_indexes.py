@@ -108,6 +108,20 @@ class MysqlIndexes():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def delete_data(self):
+        """
+        Description:
+            This function will delete data from table.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            delete_data_query ="delete from employee_details where name='Nishad'"
+            my_cursor.execute(delete_data_query)
+            db_connection.commit()
+            logger.info("Record deleted")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 
 index_obj = MysqlIndexes()
 index_obj.create_index()
@@ -116,3 +130,4 @@ index_obj.explain_index()
 index_obj.retrieve_by_index()
 index_obj.update_by_index()
 index_obj.show_data()
+index_obj.delete_data()
