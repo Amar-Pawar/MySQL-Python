@@ -91,10 +91,24 @@ class MysqlViews():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def create_view_from_view(self):
+        """
+        Description:
+            This function will create mysql view from previously created view for given columns from table.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            create_view_query ="create view emp_summary as select name,dept_name from emp_data"
+            my_cursor.execute(create_view_query)
+            logger.info("View created")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 
 view_object = MysqlViews()
-view_object.create_view()
-view_object.display_view()
-view_object.update_view()
-view_object.display_updated_view()
-view_object.create_view_with_join()
+# view_object.create_view()
+# view_object.display_view()
+# view_object.update_view()
+# view_object.display_updated_view()
+# view_object.create_view_with_join()
+view_object.create_view_from_view()
