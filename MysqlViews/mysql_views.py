@@ -41,7 +41,33 @@ class MysqlViews():
     def display_view(self):
         """
         Description:
-            This function will create mysql view from given columns from table.
+            This function will display view that created.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            show_view_query = ("select * from emp_info")
+            my_cursor.execute(show_view_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+    def update_view(self):
+        """
+        Description:
+            This function will update view.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            update_view_query = ("alter view emp_info as select id,name,salary from employee_details")
+            my_cursor.execute(update_view_query)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+    def display_updated_view(self):
+        """
+        Description:
+            This function will display updated view that created.
         """
         try:
             my_cursor = db_connection.cursor()
@@ -55,3 +81,5 @@ class MysqlViews():
 view_object = MysqlViews()
 view_object.create_view()
 view_object.display_view()
+view_object.update_view()
+view_object.display_updated_view()
