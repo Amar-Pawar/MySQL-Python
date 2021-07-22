@@ -125,6 +125,18 @@ class WindowFunction():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def window_percent_rank(self):
+        """
+        Description:
+            This function will given percent rank for specified column in query.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("select year, product,sale, percent_rank() over(partition by product order by sale) as 'percent_rank' from emp_sales")
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
 
 window_obj = WindowFunction()
 window_obj.create_table()
@@ -134,3 +146,4 @@ window_obj.window_analytical_ntile()
 window_obj.window_analytical_lead()
 window_obj.window_dense_rank()
 window_obj.window_rank()
+window_obj.window_percent_rank()
