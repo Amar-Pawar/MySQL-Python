@@ -38,5 +38,26 @@ class WindowFunction():
         except Exception as e:
             logger.info(f"error{e}")
 
+    def insert_values(self):
+        """
+        Description:
+            This function will insert vakues in table.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            query = '''insert into emp_sales(id,name,year,country, product, sale) values 
+                    (1,'Amar',2019,'India','iphone10',40000),
+                    (2,'Sagar',2021,'US','iphone12',80000),
+                    (3,'Nishad',2018,'US','iphone8',30000),
+                    (4,'Mayur',2020,'India','iphone11',50000),
+                    (5,'Sanket',2020,'UK','iphone11',50000),
+                    (6,'Swaraj',2021,'UK','iphone12',80000)'''
+            my_cursor.execute(query)
+            db_connection.commit()
+            logger.info(f"Data inserted: {my_cursor}")
+        except Exception as e:
+            logger.info(f"error{e}")
+
 window_obj = WindowFunction()
 window_obj.create_table()
+window_obj.insert_values()
