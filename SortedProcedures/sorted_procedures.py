@@ -115,6 +115,17 @@ class SortedProcedures():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def call_inout_param_procedure(self):
+        """
+        Description:
+            This function will call the sorted procedure with inout parameter.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            result = my_cursor.callproc('show_salary', [2])
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
 
     def list_procedures(self):
         """
@@ -138,5 +149,6 @@ procedure_obj.call_in_param_procedure()
 procedure_obj.procedure_out_param()
 procedure_obj.call_out_param_procedure()
 procedure_obj.procedure_inout_param()
+procedure_obj.call_inout_param_procedure()
 procedure_obj.list_procedures()
 
