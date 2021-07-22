@@ -71,7 +71,21 @@ class WindowFunction():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def window_analytical_ntile(self):
+        """
+        Description:
+            This function will sort rows in given numbers in ntile() function.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("select year,product,sale, Ntile(4) over() as total_sale from emp_sales")
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 window_obj = WindowFunction()
 window_obj.create_table()
 window_obj.insert_values()
 window_obj.window_aggregate_function()
+window_obj.window_analytical_ntile()
