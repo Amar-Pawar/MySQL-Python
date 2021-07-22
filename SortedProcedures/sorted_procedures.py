@@ -3,8 +3,8 @@
 @Author: Amar Pawar
 @Date: 2021-07-21
 @Last Modified by: Amar Pawar
-@Last Modified time: 2021-07-21
-@Title : Program for MySQL sorted procedures
+@Last Modified time: 2021-07-22
+@Title : Program for MySQL stored procedures
 /**********************************************************************************
 '''
 import sys
@@ -28,20 +28,20 @@ class SortedProcedures():
     def create_procedure(self):
         """
         Description:
-            This function will create sorted procedure for given table in database.
+            This function will create stored procedure for given table in database.
         """
         try:
             my_cursor = db_connection.cursor()
             create_procedure_query ="create procedure emp_info() begin select * from employee_details where salary >30000; select count(name) as total_emp from employee_details; end"
             my_cursor.execute(create_procedure_query)
-            logger.info("sorted procedure created")
+            logger.info("stored procedure created")
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
     def call_procedure(self):
         """
         Description:
-            This function will call the sorted procedure created.
+            This function will call the stored procedure created.
         """
         try:
             my_cursor = db_connection.cursor()
@@ -54,20 +54,20 @@ class SortedProcedures():
     def procedure_in_param(self):
         """
         Description:
-            This function will create sorted procedure with in parameter for given table in database.
+            This function will create stored procedure with in parameter for given table in database.
         """
         try:
             my_cursor = db_connection.cursor()
             create_procedure_query ="create procedure emp_data(in var1 int) begin select * from employee_details limit var1; select count(name) as total_emp from employee_details; end"
             my_cursor.execute(create_procedure_query)
-            logger.info("sorted procedure created")
+            logger.info("stored procedure created")
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
     def call_in_param_procedure(self):
         """
         Description:
-            This function will call the sorted procedure with in parameter.
+            This function will call the stored procedure with in parameter.
         """
         try:
             my_cursor = db_connection.cursor()
@@ -80,20 +80,20 @@ class SortedProcedures():
     def procedure_out_param(self):
         """
         Description:
-            This function will create sorted procedure with out parameter for given table in database.
+            This function will create stored procedure with out parameter for given table in database.
         """
         try:
             my_cursor = db_connection.cursor()
             out_procedure_query ="create procedure max_salary(out maxsalary int) begin select max(salary) into maxsalary from employee_details; end"
             my_cursor.execute(out_procedure_query)
-            logger.info("sorted procedure created")
+            logger.info("stored procedure created")
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
     def call_out_param_procedure(self):
         """
         Description:
-            This function will call the sorted procedure with out parameter.
+            This function will call the stored procedure with out parameter.
         """
         try:
             my_cursor = db_connection.cursor()
@@ -105,20 +105,20 @@ class SortedProcedures():
     def procedure_inout_param(self):
         """
         Description:
-            This function will create sorted procedure with inout parameter for given table in database.
+            This function will create stored procedure with inout parameter for given table in database.
         """
         try:
             my_cursor = db_connection.cursor()
             out_procedure_query ="create procedure show_salary(inout sal int) begin select salary into sal from employee_details where id = '2'; end"
             my_cursor.execute(out_procedure_query)
-            logger.info("sorted procedure created")
+            logger.info("stored procedure created")
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
     def call_inout_param_procedure(self):
         """
         Description:
-            This function will call the sorted procedure with inout parameter.
+            This function will call the stored procedure with inout parameter.
         """
         try:
             my_cursor = db_connection.cursor()
@@ -130,7 +130,7 @@ class SortedProcedures():
     def list_procedures(self):
         """
         Description:
-            This function will list all the sorted procedure.
+            This function will list all the stored procedure.
         """
         try:
             my_cursor = db_connection.cursor()
@@ -138,6 +138,19 @@ class SortedProcedures():
             my_cursor.execute(list_query)
             result = my_cursor.fetchall()
             logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+    def drop_procedures(self):
+        """
+        Description:
+            This function will drop stored procedure.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            drop_query = "drop procedure show_salary"
+            my_cursor.execute(drop_query)
+            logger.info("Procedure dropped")
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
@@ -151,4 +164,5 @@ procedure_obj.call_out_param_procedure()
 procedure_obj.procedure_inout_param()
 procedure_obj.call_inout_param_procedure()
 procedure_obj.list_procedures()
+procedure_obj.drop_procedures()
 
