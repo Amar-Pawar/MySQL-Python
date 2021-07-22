@@ -58,6 +58,20 @@ class WindowFunction():
         except Exception as e:
             logger.info(f"error{e}")
 
+    def window_aggregate_function(self):
+        """
+        Description:
+            This function will give sum of sale based on given condition with window function.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("select year,product,sale,sum(sale) over(partition by year) as total_sale from emp_sales")
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 window_obj = WindowFunction()
 window_obj.create_table()
 window_obj.insert_values()
+window_obj.window_aggregate_function()
