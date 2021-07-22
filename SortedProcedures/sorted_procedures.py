@@ -51,7 +51,20 @@ class SortedProcedures():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def procedure_in_param(self):
+        """
+        Description:
+            This function will create sorted procedure with in parameter for given table in database.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            create_procedure_query ="create procedure emp_data(in var1 int) begin select * from employee_details limit var1; select count(name) as total_emp from employee_details; end"
+            my_cursor.execute(create_procedure_query)
+            logger.info("sorted procedure created")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 procedure_obj = SortedProcedures()
 procedure_obj.create_procedure()
 procedure_obj.call_procedure()
-
+procedure_obj.procedure_in_param()
