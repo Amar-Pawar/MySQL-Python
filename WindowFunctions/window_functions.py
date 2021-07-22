@@ -115,7 +115,7 @@ class WindowFunction():
     def window_rank(self):
         """
         Description:
-            This function will given ranks for specified column in query.
+            This function will given ranks for specified column in given query.
         """
         try:
             my_cursor = db_connection.cursor()
