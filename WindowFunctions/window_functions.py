@@ -84,8 +84,22 @@ class WindowFunction():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def window_analytical_lead(self):
+        """
+        Description:
+            This function will read data from next row in given condition in query.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("select year, product,sale, lead(sale,1) over(order by year) as total_sale from emp_sales")
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 window_obj = WindowFunction()
 window_obj.create_table()
 window_obj.insert_values()
 window_obj.window_aggregate_function()
 window_obj.window_analytical_ntile()
+window_obj.window_analytical_lead()
