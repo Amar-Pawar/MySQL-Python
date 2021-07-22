@@ -77,9 +77,23 @@ class SortedProcedures():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def list_procedures(self):
+        """
+        Description:
+            This function will list all the sorted procedure.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            list_query = "show procedure status where Db = 'employee'"
+            my_cursor.execute(list_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
 
 procedure_obj = SortedProcedures()
 procedure_obj.create_procedure()
 procedure_obj.call_procedure()
 procedure_obj.procedure_in_param()
 procedure_obj.call_in_param_procedure()
+procedure_obj.list_procedures()
