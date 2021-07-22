@@ -102,6 +102,20 @@ class SortedProcedures():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def procedure_inout_param(self):
+        """
+        Description:
+            This function will create sorted procedure with inout parameter for given table in database.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            out_procedure_query ="create procedure show_salary(inout sal int) begin select salary into sal from employee_details where id = '2'; end"
+            my_cursor.execute(out_procedure_query)
+            logger.info("sorted procedure created")
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+
     def list_procedures(self):
         """
         Description:
@@ -123,5 +137,6 @@ procedure_obj.procedure_in_param()
 procedure_obj.call_in_param_procedure()
 procedure_obj.procedure_out_param()
 procedure_obj.call_out_param_procedure()
+procedure_obj.procedure_inout_param()
 procedure_obj.list_procedures()
 
