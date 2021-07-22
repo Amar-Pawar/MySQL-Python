@@ -38,6 +38,20 @@ class SortedProcedures():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def call_procedure(self):
+        """
+        Description:
+            This function will call the sorted procedure created.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.callproc('emp_info')
+            for result in my_cursor.stored_results():
+                logger.info(result.fetchall())
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 procedure_obj = SortedProcedures()
 procedure_obj.create_procedure()
+procedure_obj.call_procedure()
 
