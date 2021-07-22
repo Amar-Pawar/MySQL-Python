@@ -71,6 +71,7 @@ class WindowFunction():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    # Window analytical functions
     def window_analytical_ntile(self):
         """
         Description:
@@ -97,9 +98,39 @@ class WindowFunction():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    # Window ranking functions
+    def window_dense_rank(self):
+        """
+        Description:
+            This function will give dense rank for given column in condition.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("select year, product,sale, dense_rank() over(partition by year order by sale) as 'dense_rank' from emp_sales")
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+    def window_rank(self):
+        """
+        Description:
+            This function will given ranks for specified column in query.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("select year, product,sale, rank() over(partition by year order by sale desc) as 'rank' from emp_sales")
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
+
 window_obj = WindowFunction()
 window_obj.create_table()
 window_obj.insert_values()
 window_obj.window_aggregate_function()
 window_obj.window_analytical_ntile()
 window_obj.window_analytical_lead()
+window_obj.window_dense_rank()
+window_obj.window_rank()
