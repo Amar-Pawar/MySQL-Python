@@ -68,7 +68,22 @@ class SubQueries():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def subquery_with_in_notin_operator(self):
+        """
+        Description:
+            This function will demonstrate use of subquery with in notin operator.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            sub_query ="select * from employee_details where department_id not in(select department_id from department where department_id = 101)"             
+            my_cursor.execute(sub_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 subquery_obj = SubQueries()
 subquery_obj.simple_subquery()
 subquery_obj.subquery_with_operator()
 subquery_obj.subquery_with_equality_operator()
+subquery_obj.subquery_with_in_notin_operator()
