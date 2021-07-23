@@ -96,9 +96,24 @@ class SubQueries():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def subquery_correlated(self):
+        """
+        Description:
+            This function will demonstrate use of correlated subquery.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            sub_query ="select name,salary from employee_details emp where salary <(select avg(salary) from employee_details where department_id = emp.department_id)"
+            my_cursor.execute(sub_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 subquery_obj = SubQueries()
 subquery_obj.simple_subquery()
 subquery_obj.subquery_with_operator()
 subquery_obj.subquery_with_equality_operator()
 subquery_obj.subquery_with_in_notin_operator()
 subquery_obj.subquery_with_from_clause()
+subquery_obj.subquery_correlated()
