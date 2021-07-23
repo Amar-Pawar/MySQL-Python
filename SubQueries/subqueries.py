@@ -40,5 +40,20 @@ class SubQueries():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def subquery_with_operator(self):
+        """
+        Description:
+            This function will demonstrate use of subquery with comparison operator.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            sub_query ="select * from employee_details where id in (select id from employee_details where salary > 40000)"
+            my_cursor.execute(sub_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 subquery_obj = SubQueries()
 subquery_obj.simple_subquery()
+subquery_obj.subquery_with_operator()
