@@ -82,8 +82,23 @@ class SubQueries():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def subquery_with_from_clause(self):
+        """
+        Description:
+            This function will demonstrate use of subquery with from clause.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            sub_query ="select max(items),min(items) from (select count(salary) as items from employee_details group by department_id) as emp_details"
+            my_cursor.execute(sub_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 subquery_obj = SubQueries()
 subquery_obj.simple_subquery()
 subquery_obj.subquery_with_operator()
 subquery_obj.subquery_with_equality_operator()
 subquery_obj.subquery_with_in_notin_operator()
+subquery_obj.subquery_with_from_clause()
