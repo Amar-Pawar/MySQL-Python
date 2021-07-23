@@ -124,6 +124,20 @@ class SubQueries():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def subquery_not_exists(self):
+        """
+        Description:
+            This function will demonstrate use of subquery with not exists.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            sub_query ="select name, salary from employee_details e where not exists(select * from department d where e.department_id = d.department_id)"
+            my_cursor.execute(sub_query)
+            result = my_cursor.fetchall()
+            logger.info(result)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 subquery_obj = SubQueries()
 subquery_obj.simple_subquery()
 subquery_obj.subquery_with_operator()
@@ -132,3 +146,4 @@ subquery_obj.subquery_with_in_notin_operator()
 subquery_obj.subquery_with_from_clause()
 subquery_obj.subquery_correlated()
 subquery_obj.subquery_exists()
+subquery_obj.subquery_not_exists()
