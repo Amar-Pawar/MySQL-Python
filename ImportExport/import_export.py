@@ -49,7 +49,7 @@ class ImportExport():
         """
         try:
             my_cursor = db_connection.cursor()
-            os.system('mysqldump -u root  emp_information < data-dump.sql')
+            os.system('mysql -u root  emp_information < data-dump.sql')
             logger.info("importing done")
             my_cursor.execute("show databases")
             db_connection.commit()
