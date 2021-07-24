@@ -24,6 +24,10 @@ db_connection = mysql.connector.connect(
      auth_plugin = os.environ.get("AUTH_PLUGIN"),
      database = os.environ.get("DATABASE")
     )
+#importing csv file and converting it into pandas dataframe
+data = pd.read_csv (r'us_data.csv')   
+df = pd.DataFrame(data, columns= ['Rank','State','Postal','Population'])
+logger.info(df)
 
 class ImportExport():
 
@@ -65,7 +69,27 @@ class ImportExport():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def import_from_csv(self):
+        """
+        Description:
+            This function will import data from csv file and conver it into mysql database table.
+        """
+        try: 
+            my_cursor = db_connection.cursor()
+            for row in df.itertuples():
+                my_cursor.execute('''INSERT INTO us_info(rank_id,state_name,postal,population)
+                            VALUES (%s,%s,%s,%s)''',
+                            (row.Rank, 
+                            row.State,
+                            row.Postal,
+                            row.Population)
+                            )
+            db_connection.commit()
+        except Exception as e:
+            logger.info(f"Error!!{e}")
+
 import_export_obj = ImportExport()
 import_export_obj.export_database()
 import_export_obj.import_database()
 import_export_obj.show_tables()
+import_export_obj.import_from_csv()
