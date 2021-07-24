@@ -38,5 +38,20 @@ class ImportExport():
         except Exception as e:
             logger.info(f"error!!{e}")
 
+    def import_database(self):
+        """
+        Description:
+            This function will import database from given file.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            os.system('mysqldump -u root  emp_information < data-dump.sql')
+            logger.info("importing done")
+            my_cursor.execute("show databases")
+            db_connection.commit()
+        except Exception as e:
+            logger.info(f"error!!{e}")
+
 import_export_obj = ImportExport()
 import_export_obj.export_database()
+import_export_obj.import_database()
