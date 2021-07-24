@@ -52,6 +52,20 @@ class ImportExport():
         except Exception as e:
             logger.info(f"error!!{e}")
 
+    def show_tables(self):
+        """
+        Description:
+            This function will show tables from imported database.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            my_cursor.execute("show tables")
+            for i in my_cursor:
+                logger.info(i)
+        except Exception as e:
+            logger.info(f"Errorr!!{e}")
+
 import_export_obj = ImportExport()
 import_export_obj.export_database()
 import_export_obj.import_database()
+import_export_obj.show_tables()
