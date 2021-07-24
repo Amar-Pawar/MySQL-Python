@@ -69,6 +69,19 @@ class ImportExport():
         except Exception as e:
             logger.info(f"Errorr!!{e}")
 
+    def create_table():
+        """
+        Description:
+            This function will create a new table.
+        """
+        try:
+            my_cursor = db_connection.cursor()
+            query = "create table us_info(rank_id int primary key not null,state_name varchar(20),postal varchar(20),population int)"
+            my_cursor.execute(query)
+            logger.info("table crated")
+        except Exception as e:
+            logger.info(f"error{e}")
+
     def import_from_csv(self):
         """
         Description:
@@ -92,4 +105,5 @@ import_export_obj = ImportExport()
 import_export_obj.export_database()
 import_export_obj.import_database()
 import_export_obj.show_tables()
+import_export_obj.create_table()
 import_export_obj.import_from_csv()
